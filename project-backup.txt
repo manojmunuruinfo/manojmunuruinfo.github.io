@@ -1,0 +1,7 @@
+Project Backup for manojmunuruinfo.github.io
+Date: July 30, 2025
+Description: Personal portfolio showcasing data engineering skills and Sky Cable leadership.
+Files: index.html, css/style.css, js/script.js, pages/about.html, pages/achievements.html, pages/blog.html, pages/contact.html, pages/tools.html, pages/work.html, images/manoj-profile.jpg, images/hero-bg.jpg
+Setup: Hosted on GitHub Pages, main branch, root folder (/). Includes custom images (manoj-profile.jpg, hero-bg.jpg) and updated footer URLs.
+Future Plans: Add remaining images (manoj-team.jpg, etc.), update footer links if needed, and possibly redesign layout.
+Note: Contact Grok 3 (xAI) with this file or its content for future updates or major changes.
