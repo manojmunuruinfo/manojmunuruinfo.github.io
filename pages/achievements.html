@@ -1,0 +1,115 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Achievements of Manoj Munuru, data engineer">
+    <meta name="keywords" content="Manoj Munuru, Snowflake, Power BI, Microsoft certifications">
+    <title>Achievements - Manoj Munuru</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-light-background font-poppins transition-colors duration-300">
+    <button id="themeToggle" class="fixed top-4 right-4 bg-primary text-white px-3 py-2 rounded-full hover:bg-accent z-20">
+        <span class="light-text">Dark Mode</span>
+        <span class="dark-text hidden">Light Mode</span>
+    </button>
+
+    <header class="bg-primary text-white py-4 shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl sm:text-3xl font-bold text-center sm:text-left">Manoj Munuru Learning Hub</h1>
+            <nav class="mt-4 sm:mt-0">
+                <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center">
+                    <li><a href="../index.html" class="hover:text-accent transition-colors">Home</a></li>
+                    <li><a href="about.html" class="hover:text-accent transition-colors">About</a></li>
+                    <li><a href="achievements.html" class="hover:text-accent transition-colors">Achievements</a></li>
+                    <li><a href="work.html" class="hover:text-accent transition-colors">Work Experience</a></li>
+                    <li><a href="tools.html" class="hover:text-accent transition-colors">Tools</a></li>
+                    <li><a href="blog.html" class="hover:text-accent transition-colors">Blog</a></li>
+                    <li><a href="contact.html" class="hover:text-accent transition-colors">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10" id="content" style="display: none;">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-primary animate-fade-in">My Achievements</h2>
+        <div class="bg-card-bg p-6 rounded-lg shadow-md card">
+            <ul class="text-base sm:text-lg text-text-color space-y-4">
+                <li>PL-300: Microsoft Power BI Data Analyst (2023)</li>
+                <li>DP-203: Data Engineering on Microsoft Azure (2023)</li>
+                <li>Led 7-member team in Sky Cable project with 95% ETL efficiency</li>
+            </ul>
+            <div class="mt-6">
+                <p class="text-text-color">Certification Progress (100% Complete)</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-4 text-center">
+        <p>&copy; 2025 Manoj Munuru. All rights reserved.</p>
+        <div class="mt-2">
+            <div class="mt-2">
+    <a href="https://www.linkedin.com/in/manoj-kumar-munuru-95ab43145" class="text-accent hover:underline mx-2">LinkedIn</a>
+    <a href="https://learn.microsoft.com/api/credentials/share/en-us/MANOJKUMARMUNURU-9296/99E39DF764697F18?sharingId=DDF1C9BB53E09823" class="text-accent hover:underline mx-2">Azure Security Engineer</a>
+    <a href="https://learn.microsoft.com/api/credentials/share/en-us/MANOJKUMARMUNURU-9296/49BC49E42F9478C?sharingId=DDF1C9BB53E09823" class="text-accent hover:underline mx-2">Power BI Data Analyst</a>
+    <a href="https://learn.microsoft.com/api/credentials/share/en-us/MANOJKUMARMUNURU-9296/1C2602436A4A6CBD?sharingId=DDF1C9BB53E09823" class="text-accent hover:underline mx-2">Azure Data Fundamentals</a>
+    <a href="https://learn.microsoft.com/api/credentials/share/en-us/MANOJKUMARMUNURU-9296/A66100CB9C599661?sharingId=DDF1C9BB53E09823" class="text-accent hover:underline mx-2">Azure Data Engineer</a>
+        </div>
+    </footer>
+
+    <script>
+        const password = prompt("Enter password to view achievements:");
+        if (password === "manoj123") { // Replace with your secure password
+            document.getElementById("content").style.display = "block";
+        } else {
+            alert("Incorrect password!");
+            window.location.href = "../index.html";
+        }
+    </script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

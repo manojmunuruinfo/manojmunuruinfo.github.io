@@ -1,0 +1,137 @@
+/* Custom styles for Manoj Munuru Learning Hub */
+
+/* CSS Variables */
+:root {
+    --primary-color: #1e3a8a; /* Blue-900 */
+    --secondary-color: #7e22ce; /* Purple-600 */
+    --accent-color: #3b82f6; /* Blue-600 */
+    --background-color: #f3f4f6; /* Light gray */
+    --card-bg: #ffffff; /* White */
+    --text-color: #1f2937; /* Gray-900 */
+    --dark-background: #1f2937; /* Dark gray */
+    --dark-card-bg: #374151; /* Gray-700 */
+    --dark-text: #e5e7eb; /* Gray-200 */
+}
+
+/* Dark Mode */
+.dark-mode {
+    --background-color: var(--dark-background);
+    --card-bg: var(--dark-card-bg);
+    --text-color: var(--dark-text);
+}
+.bg-light-background {
+    background-color: var(--background-color);
+}
+.bg-card-bg {
+    background-color: var(--card-bg);
+}
+.text-text-color {
+    color: var(--text-color);
+}
+
+/* Fonts */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Card Animations */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+/* Parallax Effect */
+.bg-parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Custom Cursor */
+body {
+    cursor: url('images/cursor.png'), auto;
+}
+a, button {
+    cursor: url('images/cursor-hover.png'), pointer;
+}
+
+/* Progress Bar (Achievements) */
+.progress-bar {
+    background-color: #e5e7eb;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-fill {
+    background-color: var(--accent-color);
+    height: 100%;
+    transition: width 1s ease-in-out;
+}
+
+/* Timeline (Work) */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent-color);
+}
+.timeline-item {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 0.25rem;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .card img {
+        height: 150px;
+    }
+    #themeToggle {
+        top: 2rem;
+        right: 1rem;
+        font-size: 0.9rem;
+    }
+    .bg-parallax {
+        background-attachment: scroll; /* Parallax disabled on mobile for performance */
+    }
+}
